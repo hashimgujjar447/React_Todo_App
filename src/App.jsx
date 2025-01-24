@@ -44,6 +44,9 @@ function App() {
   );
 
   const handleChecked = useCallback((id) => {
+    if (editableTodoId === id) {
+      setEditableTodoId(null);
+    }
     setTaskList((prev) =>
       prev.map((task) =>
         task.id === id ? { ...task, completed: !task.completed } : task
