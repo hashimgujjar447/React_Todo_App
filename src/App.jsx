@@ -43,16 +43,18 @@ function App() {
     [taskList]
   );
 
-  const handleChecked = useCallback((id) => {
-    if (editableTodoId === id) {
-      setEditableTodoId(null);
-    }
-    setTaskList((prev) =>
-      prev.map((task) =>
-        task.id === id ? { ...task, completed: !task.completed } : task
-      )
-    );
-  }, []);
+  const handleChecked = useCallback(
+    (id) => {
+      if (editableTodoId === id) return;
+
+      setTaskList((prev) =>
+        prev.map((task) =>
+          task.id === id ? { ...task, completed: !task.completed } : task
+        )
+      );
+    },
+    [editableTodoId]
+  );
 
   const handleDelete = useCallback((id) => {
     setTaskList((prev) => prev.filter((task) => task.id !== id));
