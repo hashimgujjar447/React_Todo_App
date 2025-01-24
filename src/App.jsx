@@ -57,13 +57,17 @@ function App() {
 
   useEffect(() => {
     const items = localStorage.getItem("taskList");
+
     if (items) {
-      setTaskList(JSON.parse(items));
+      const parseItems = JSON.parse(items);
+      setTaskList(parseItems);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("taskList", JSON.stringify(taskList));
+    if (taskList.length > 0) {
+      localStorage.setItem("taskList", JSON.stringify(taskList));
+    }
   }, [taskList]);
 
   return (
